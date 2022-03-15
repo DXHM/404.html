@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        *{box-sizing: border-box;}
+        body{
+            background: #000;
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            text-shadow: 0px 0px 80px;
+        }
+        h1{
+            margin: 0;
+            padding: 0;
+            color: #0ff;
+        }
+        a{color: #fff;}
+        /* 盒子↓ */
+        p{
+            margin: 0;
+        }
+        .box{
+            /* 盒子宽度↓ ---最好别改*/
+            width: 700px;
+            /* 让视频居中对齐↓---最好别动 */
+            text-align: center;
+            /* border: 1px solid #f00; */
+            color: #fff;
+            
+            position: absolute;
+            margin: 20px auto 0;
+            top: 20px;
+            left: 0;
+            right: 0;
+        }
+        /* 图片样式↓ */
+
+        img{
+            /* 视频宽度↓ ---最好不要大于上面盒子的宽度*/
+            width: 700px;
+            height: 390px;
+            /* 灰色的描边↓ ---px是粗细 solid是实线 #555是颜色代码 可以百度html颜色代码修改*/
+            border: 2px solid #222;
+            /* 图片的圆角 */
+            border-radius: 5px;
+            /* 动画时间 */
+            transition: 0.8s;
+        }
+        .img2:hover{border: 2px solid #980b18}
+
+        .box>div{
+            padding: 20px;
+            /* border: 1px solid #f00; */
+        }
+        .szj{
+            position: absolute;
+            top: 0;
+            left: 0;
+            color: #fff;
+            padding: 5px;
+            border: 1px solid #eee;
+            background-color: rgb(0,0,0,0.7)
+        }
+        .yl{
+            display: inline;
+            border-bottom:1px dotted #0ff;
+        }
+        .yl a{
+            text-decoration: none;
+            color:#c6d491;
+            
+        }
+        .yl span{
+            margin-right: 8px;
+        }
+    </style>
+</head>
+<body>
+    <canvas id="canvas"></canvas>
+    <div class="box">
+        <!-- 图片部分 -->
+        <img class="img2" src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1568641472&di=9dbacb75cf245d0eb57e757e0d2247f7&imgtype=jpg&er=1&src=http%3A%2F%2Fimg1.doubanio.com%2Fview%2Fphoto%2Fl%2Fpublic%2Fp2290059157.jpg" alt="">
+        <div class="text">
+            <h1>真のBLACK</h1>
+
+            <br>
+
+            <span style="color: #0f0">MY GITHUB：</span><span><a target="view_window" href="github.com/dxhm">DXHM</a></span>
+<br><br>
+
+            <p class="glow" style="color: #f00; font-size:21px;">404 PAGE</p>
+            <p class="glow" style="color: #f00; font-size:10px;">404</p>
+            <br>
+            <span style="color: #3ee5df">WHOAMI：</span><span><a  style="color: #e5743e;" target="view_window" href="http://wpa.qq.com/msgrd?v=3&uin=2390667330&site=qq&menu=yes">MY QQ</a></span>
+            <br><br>
+            <P class="glow">此页面为404</P>
+<br><br><br><br>
+            <div class="yl"><span style="color: #f0f">友情链接：</span><span><a href="dxhm.github.io">广告位招租</a></span> <span><a href="dxhm.github.io">广告位招租</a></span><span><a href="dxhm.github.io">广告位招租</a></span></div>
+
+        </div>
+    </div>
+    <div class="szj">
+<pre>
+  渗透三字经
+
+进谷歌 找注入
+
+没注入 就旁注
+
+没旁注 用Oday
+
+没Oday 猜目录
+
+没目录 就嗅探
+
+爆账户 找后台
+
+传小马 放大马
+
+拿权限 挂页面
+</pre>
+
+    
+
+
+    <!-- 音乐部分 -->
+    <embed height="0" width="0" src="https://music.163.com/outchain/player?type=2&id=29400926&auto=1&height=66"></embed>
+
+    
+
+
+    <!-- 以下js -->
+
+
+    <script>
+    var canvas = document.getElementById('canvas');
+		var ctx = canvas.getContext('2d');
+
+
+		canvas.height = window.innerHeight;
+		canvas.width = window.innerWidth;
+        // 下面的就是代码雨的文字
+		var texts = '真のBLACK'.split('');
+
+		var fontSize = 16;
+		var columns = canvas.width/fontSize;
+		// 用于计算输出文字时坐标，所以长度即为列数
+		var drops = [];
+		//初始值
+		for(var x = 0; x < columns; x++){
+			drops[x] = 1;
+		}
+
+		function draw(){
+			//让背景逐渐由透明到不透明
+			ctx.fillStyle = 'rgba(0, 0, 0, 0.05)';
+			ctx.fillRect(0, 0, canvas.width, canvas.height);
+			//文字颜色
+			ctx.fillStyle = '#0F0';
+			ctx.font = fontSize + 'px arial';
+			//逐行输出文字
+			for(var i = 0; i < drops.length; i++){
+				var text = texts[Math.floor(Math.random()*texts.length)];
+				ctx.fillText(text, i*fontSize, drops[i]*fontSize);
+
+				if(drops[i]*fontSize > canvas.height || Math.random() > 0.95){
+					drops[i] = 0;
+				}
+
+				drops[i]++;
+			}
+		}
+	setInterval(draw, 33);
+</script>
+</body>
+</html>
